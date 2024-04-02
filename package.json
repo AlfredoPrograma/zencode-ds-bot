@@ -3,7 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "run": "bun run ./src/index.ts"
+    "cronjob": "bun run ./src/cronjob.ts",
+    "start": "bun run ./src/index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"

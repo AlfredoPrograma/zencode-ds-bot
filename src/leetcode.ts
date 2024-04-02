@@ -69,7 +69,6 @@ export async function execute(interaction: CommandInteraction) {
     const file = Bun.file(PROBLEMS_FILE_PATH)
     const json: Awaited<Promise<ProblemsJson>> = await file.json()
 
-    await updateProblemIndex()
     const todayProblem = await getProblemByIndex(json.problems)
 
     return interaction.reply(todayProblem ?? "Index out of bound?")
