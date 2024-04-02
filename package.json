@@ -2,6 +2,9 @@
   "name": "zen-leetcode-bot",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "run": "bun run ./src/index.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
