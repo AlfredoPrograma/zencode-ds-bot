@@ -2,7 +2,8 @@ import { CommandInteraction, SlashCommandBuilder } from "discord.js"
 
 // This file will be some kind of persisting storage for the index state for problems
 // It will be the "source of truth" for the daily problem
-const PROBLEMS_INDEX_FILE_PATH = "problems-index.txt"
+const PROBLEMS_INDEX_FILE_PATH = `${process.env.DATA_FOLDER}/${process.env.INDEX_FILE}`
+const PROBLEMS_FILE_PATH = `${process.env.DATA_FOLDER}/${process.env.PROBLEMS_FILE}` 
 
 /**
  * Tries to read from index storage file and returns the current problem index
@@ -65,7 +66,6 @@ export const data = new SlashCommandBuilder().setName("leetcode").setDescription
 
 export async function execute(interaction: CommandInteraction) {
   try {
-    const PROBLEMS_FILE_PATH = "problems.json"
     const file = Bun.file(PROBLEMS_FILE_PATH)
     const json: Awaited<Promise<ProblemsJson>> = await file.json()
 
