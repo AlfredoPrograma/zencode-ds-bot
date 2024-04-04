@@ -33,7 +33,10 @@ export async function getProblemByIndex(problems: string[]) {
       throw new Error("Invalid index computed")
     }
 
-    return problems[index]
+    return {
+      problem: problems[index],
+      index
+    } 
   } catch(err) {
     console.error(err)
   }
@@ -69,9 +72,11 @@ export async function execute(interaction: CommandInteraction) {
     const file = Bun.file(PROBLEMS_FILE_PATH)
     const json: Awaited<Promise<ProblemsJson>> = await file.json()
 
-    const todayProblem = await getProblemByIndex(json.problems)
+    const { problem, index } = await getProblemByIndex(json.problems)?? {} 
 
-    return interaction.reply(todayProblem ?? "Index out of bound?")
+    const formattedMsg = `Today's Leetcode challenge is: [#${index}](${problem})`
+
+    return interaction.reply(formattedMsg)
   } catch(err) {
     console.error(err)
   }
